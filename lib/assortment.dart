@@ -94,7 +94,6 @@ class Assortment {
       _dragging = true;
       // use the drag icon for moving
       event.dataTransfer.effectAllowed = "move";
-      event.dataTransfer.setData('text/plain', '');
       // set the drag element
       _dragElement = event.currentTarget;
       // add assortment event to stream
@@ -104,6 +103,11 @@ class Assortment {
 
     // prevent the animation that occurs when a drag fails
     _addListener(element, element.onDragOver.listen((event) {
+      event.preventDefault();
+    }));
+
+    // prevent default browser handling for dropped data
+    _addListener(element, element.onDrop.listen((event) {
       event.preventDefault();
     }));
 
